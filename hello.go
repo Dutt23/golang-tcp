@@ -4,20 +4,20 @@ import (
 	"fmt"
 )
 
-func main() {
-	// var count = int(42)
-	// ptr := &count
-	// fmt.Println(*ptr)
-	// *ptr = 100
-	// fmt.Println(count)
-	var guy = new(Person)
-	guy.Name = "Shatyaki"
-	// guy.sayHello()
-	// greet(guy)
-	// foo(guy)
-	// normalForLoop()
-	rangedForLoop()
-}
+// func main() {
+// 	// var count = int(42)
+// 	// ptr := &count
+// 	// fmt.Println(*ptr)
+// 	// *ptr = 100
+// 	// fmt.Println(count)
+// 	var guy = new(Person)
+// 	guy.Name = "Shatyaki"
+// 	// guy.sayHello()
+// 	// greet(guy)
+// 	// inter(guy)
+// 	// normalForLoop()
+// 	rangedForLoop()
+// }
 
 func normalForLoop() {
 	for i := 0; i < 10; i++ {
@@ -32,7 +32,7 @@ func rangedForLoop() {
 	}
 }
 
-func foo(i interface{}) {
+func inter(i interface{}) {
 	switch v := i.(type) {
 	case int:
 		fmt.Println("INteger value")

@@ -3,17 +3,16 @@ package main
 import (
 	"errors"
 	"fmt"
-	"time"
 )
 
-func main() {
-	go print()
-	// time.Sleep(3 * time.Second)
-	// fmt.Println("main function")
-	channel()
-	time.Sleep(3 * time.Second)
-	fmt.Println("main function")
-}
+// func main() {
+// 	go print()
+// 	// time.Sleep(3 * time.Second)
+// 	// fmt.Println("main function")
+// 	channel()
+// 	time.Sleep(3 * time.Second)
+// 	fmt.Println("main function")
+// }
 
 func print() {
 	fmt.Println("Pringing")
