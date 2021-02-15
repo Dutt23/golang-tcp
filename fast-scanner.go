@@ -18,6 +18,7 @@ func main() {
 	// Seperate go routine. results channel needs to start before we 100 units of work is done
 	go checkPorts(1024, ports)
 	for i := 0; i < 1024; i++ {
+		// Blocking call
 		port := <-results
 		if port != 0 {
 			openports = append(openports, port)
