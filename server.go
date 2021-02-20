@@ -1,34 +1,47 @@
 package main
 
 import (
+	"bufio"
 	"io"
 	"log"
 	"net"
+	"strings"
 )
 
 func echo(conn net.Conn) {
 	defer conn.Close()
 
-	b := make([]byte, 512)
-
 	for {
-		size, err := conn.Read(b[0:])
+		reader := bufio.NewReader(conn)
+		s, err := reader.ReadString(('\n'))
+
 		if err == io.EOF {
-			log.Println("Client disconnected")
+			log.Println("Client has disconnected")
+			break
+		}
+		if err != nil {
+			log.Println("Unexpected error has occured")
 			break
 		}
 
-		if err != nil {
-			log.Println("Unexpected error has occured")
+		if len(strings.TrimSpace(s)) <= 0 {
+			continue
 		}
 
-		log.Printf("Received %d bytes: %s\n", size, string(b))
+		log.Printf("Received %d bytes: %s\n", len(s), s)
 		// Send data via conn.Write.
 		log.Println("Writing data")
-
-		if _, err := conn.Write(b[0:size]); err != nil {
+		writer := bufio.NewWriter(conn)
+		if _, err := writer.Write([]byte(s)); err != nil {
 			log.Fatalln("Unable to write data")
 		}
+		// Required to flush the dat into the socket for reply
+		writer.Flush()
+
+		// One line method
+		// if _, err := io.Copy(conn, conn); err != nil {
+		// 	log.Fatalln("Unable to read or write data")
+		// }
 	}
 }
 
@@ -41,7 +54,6 @@ func main() {
 	log.Println("Listening on port 20080")
 
 	for {
-		log.Println("Witing 1")
 		conn, err := listener.Accept()
 		log.Println("Received connection")
 		if err != nil {
