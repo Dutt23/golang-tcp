@@ -7,7 +7,7 @@ import (
 )
 
 func handle(src net.Conn) {
-	dst, err := net.Dial("tcp", "joescatcam.website:80")
+	dst, err := net.Dial("tcp", "golang.org:80")
 	if err != nil {
 		log.Fatalln("Unable to get connection")
 	}
